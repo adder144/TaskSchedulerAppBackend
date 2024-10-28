@@ -123,3 +123,14 @@ MarkNotificationAsRead
 {
     NotificationID : `${_id-of-notification_to_be_marked_as_read}
 }
+
+SetNotificationPreferences
+{
+    "TaskEditNotification": "Chime",
+    "TaskStatusChangeNotification": "Silent",
+    "TaskAssignNotification": "Silent",
+    "TaskDismissNotification": "Chime",
+    "TaskDeleteNotification": "Chime",
+    "NewSupervisorNotification": "Silent",
+    "RemovedSupervisorNotification": "Default"
+}
