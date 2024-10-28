@@ -1,0 +1,125 @@
+////No Authorization Needed For UserRegistration and UseLogin
+UserRegistrations
+{
+    "userName": "user2",
+    "password": "password",
+    "confirmPassword": "password",
+    "userRole": "Subordinate"
+}
+{
+    "userName": "super2",
+    "password": "password",
+    "confirmPassword": "password",
+    "userRole": "Supervisor"
+}
+UserLogin
+{
+    "userName": "user2",
+    "password": "password"
+}
+{
+    "userName": "super2",
+    "password": "password"
+}
+////Authorization Needed for Everything Else
+//Set Authorization to "Bearer ${token} in header
+
+AddSubordinate
+{
+    "SubordinateID": `${_id-of-subordinate}`
+}
+
+RemoveSubordinate
+{
+    "SubordinateID": `${_id-of-subordinate}`
+}
+
+AddTask
+{
+    "Task": {
+        "title": "Complete Project",
+        "description": "Complete the project by end of the week",
+        "dueDate": "2024-11-01",
+        "category": "Work",
+        "dependencyOnAnotherTask": `${_id-of-task}`,
+        "status": "Pending"
+    }
+}
+
+EditTask
+{
+    "TaskID": `${_id-of-task-to-be-edited}`,
+    "Task": {
+        "title": "Updated Task Title",
+        "description": "Updated Task Description",
+        "dueDate": "2024-11-01",
+        "category": "Work",
+        "dependencyOnAnotherTask": `${updated-_id-of-task-dependedOn}`,
+        "status": "In Progress"
+    }
+}
+
+DeleteTask
+{
+    "TaskID": `${_id-of-task-to-be-edited}`
+}
+
+ViewTask
+{
+    "TaskID": `${_id-of-task-to-be-edited}`
+}
+
+ViewAllTask || ViewOwnTask || SubordinateViewAssignedTask
+//None of the values are required
+{
+    "DueDateAfter": "2024-10-01",
+    "DueDateBefore": "2024-12-31",
+    "Category": "[\"Work\", \"Personal\"]",
+    "Title": "Task",
+    "Status": "[\"In Progress\", \"Complete\"]",
+    "SortBy" : "title",
+    "SortOrder" : "descending" 
+}
+
+SupervisorViewAssignedTask
+//None of the values are required
+{   
+    "AssignedID" : `_id-of-subordinate`,
+    "DueDateAfter": "2024-10-01",
+    "DueDateBefore": "2024-12-31",
+    "Category": "[\"Work\", \"Personal\"]",
+    "Title": "Task",
+    "Status": "[\"In Progress\", \"Complete\"]",
+    "SortBy" : "title",
+    "SortOrder" : "descending" 
+}
+
+AssignTask
+{
+    "AssignedID": `_id-of-subordinate`,
+    "Task": {
+        "title": "New Task Title",
+        "description": "Task description",
+        "dueDate": "2024-11-01",
+        "category": "Work",
+        "dependencyOnAnotherTask": `${_id-of-task}`,
+        "status": "Pending"
+    }
+}
+
+ChangeTaskStatus
+{
+    "TaskID": `${_id-of-task-to-be-edited}`,
+    "Status": `${new_task_status}`
+}
+
+ReassignTask
+{
+    "TaskID": `${_id-of-task-to-be-reassigned}`,
+    "AssignedID": `${_id-of-user-to-be-assigned}`
+}
+
+MarkNotificationAsRead
+{
+    NotificationID : `${_id-of-notification_to_be_marked_as_read}
+}
