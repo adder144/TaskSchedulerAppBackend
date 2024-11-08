@@ -26,111 +26,113 @@ UserLogin
 
 AddSubordinate
 {
-    "SubordinateID": `${_id-of-subordinate}`
+    SubordinateID:_id-of-subordinate
 }
 
 RemoveSubordinate
 {
-    "SubordinateID": `${_id-of-subordinate}`
+    SubordinateID:_id-of-subordinate
 }
 
 AddTask
 {
-    "Task": {
-        "title": "Complete Project",
-        "description": "Complete the project by end of the week",
-        "dueDate": "2024-11-01",
-        "category": "Work",
-        "dependencyOnAnotherTask": `${_id-of-task}`,
-        "status": "Pending"
-    }
+    title:New Task Title
+    description:Task description
+    dueDate:2024-11-01
+    category:Work
+    //dependencyOnAnotherTask:_id-of-task-this-task-depends-on 
+    status:Pending
 }
 
 EditTask
 {
-    "TaskID": `${_id-of-task-to-be-edited}`,
-    "Task": {
-        "title": "Updated Task Title",
-        "description": "Updated Task Description",
-        "dueDate": "2024-11-01",
-        "category": "Work",
-        "dependencyOnAnotherTask": `${updated-_id-of-task-dependedOn}`,
-        "status": "In Progress"
-    }
+    TaskID:_id-of-task-to-be-edited
+    title:New Task Title
+    description:Task description
+    dueDate:2024-11-01
+    category:Work
+    //dependencyOnAnotherTask:_id-of-task-this-task-depends-on 
+    status:Pending
+
 }
 
 DeleteTask
 {
-    "TaskID": `${_id-of-task-to-be-edited}`
+    TaskID:_id-of-task-to-be-deleted
 }
 
 ViewTask
 {
-    "TaskID": `${_id-of-task-to-be-edited}`
+    TaskID:_id-of-task-to-be-veiwed
 }
+
+AssignTask
+{
+    AssignedID:671e93ee7bf3a72457acc7e8
+    title:New Task Title
+    description:Task description
+    dueDate:2024-11-01
+    category:Work
+    //dependencyOnAnotherTask:_id-of-task-this-task-depends-on 
+    status:Pending
+}
+
 
 ViewAllTask || ViewOwnTask || SubordinateViewAssignedTask
 //None of the values are required
 {
-    "DueDateAfter": "2024-10-01",
-    "DueDateBefore": "2024-12-31",
-    "Category": "[\"Work\", \"Personal\"]",
-    "Title": "Task",
-    "Status": "[\"In Progress\", \"Complete\"]",
-    "SortBy" : "title",
-    "SortOrder" : "descending" 
+    DueDateAfter:2024-10-01
+    DueDateBefore:2024-12-31
+    Category:Work*Personal
+    Title:Task
+    Status:In Progress*Complete
+    SortBy:title
+    SortOrder:descending
+
+
+
 }
 
 SupervisorViewAssignedTask
 //None of the values are required
 {   
-    "AssignedID" : `_id-of-subordinate`,
-    "DueDateAfter": "2024-10-01",
-    "DueDateBefore": "2024-12-31",
-    "Category": "[\"Work\", \"Personal\"]",
-    "Title": "Task",
-    "Status": "[\"In Progress\", \"Complete\"]",
-    "SortBy" : "title",
-    "SortOrder" : "descending" 
+    AssignedID:_id-of-subordinate
+    DueDateAfter:2024-10-01
+    DueDateBefore:2024-12-31
+    Category:Work*Personal
+    Title:Task
+    Status:In Progress*Complete
+    SortBy:title
+    SortOrder:descending
 }
 
-AssignTask
-{
-    "AssignedID": `_id-of-subordinate`,
-    "Task": {
-        "title": "New Task Title",
-        "description": "Task description",
-        "dueDate": "2024-11-01",
-        "category": "Work",
-        "dependencyOnAnotherTask": `${_id-of-task}`,
-        "status": "Pending"
-    }
-}
 
 ChangeTaskStatus
 {
-    "TaskID": `${_id-of-task-to-be-edited}`,
-    "Status": `${new_task_status}`
+    
+    
+    TaskID:_id-of-task-to-be-edited
+    Status:new_task_status
 }
 
 ReassignTask
 {
-    "TaskID": `${_id-of-task-to-be-reassigned}`,
-    "AssignedID": `${_id-of-user-to-be-assigned}`
+    TaskID:_id-of-task-to-be-reassigned
+    AssignedID:_id-of-user-to-be-assigned
 }
 
 MarkNotificationAsRead
 {
-    NotificationID : `${_id-of-notification_to_be_marked_as_read}
+    NotificationID:_id-of-notification_to_be_marked_as_read
 }
 
 SetNotificationPreferences
 {
-    "TaskEditNotification": "Chime",
-    "TaskStatusChangeNotification": "Silent",
-    "TaskAssignNotification": "Silent",
-    "TaskDismissNotification": "Chime",
-    "TaskDeleteNotification": "Chime",
-    "NewSupervisorNotification": "Silent",
-    "RemovedSupervisorNotification": "Default"
+    TaskEditNotification:Chime
+    TaskStatusChangeNotification:Silent
+    TaskAssignNotification:Silent
+    TaskDismissNotification:Chime
+    TaskDeleteNotification:Chime
+    NewSupervisorNotification:Silent
+    RemovedSupervisorNotification:Default
 }

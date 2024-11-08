@@ -126,6 +126,7 @@ const UserMiddleware = async (req, res, next) => {
       
       const decoded = jwt.verify(token, JWT_SECRET);
       const { id, userName, userRole } = decoded;
+      console.log(id, userName, userRole);
 
       const isLoggedIn = await LoggedIn.findOne({ userId: id });
       if (!isLoggedIn) {
@@ -152,6 +153,7 @@ app.get('/UserLogout', UserMiddleware, async (req, res) => {
   }
 });
 
+//Users
 
 app.get('/ViewAllSubordinates', SupervisorMiddleware, async (req, res) => {
   console.log("/ViewAllSubordinates")
@@ -273,18 +275,24 @@ app.post('/RemoveSubordinate', SupervisorMiddleware, async (req, res) => {
   }
 });
 
+
+//Task
+
 app.post('/AddTask', UserMiddleware, async (req, res) => {
 
   console.log('/AddTask');
-  const { UserID } = req.body.params;
+//   const { UserID } = req.body.params;
 
 
   try {
-    const taskData = req.body.Task;
+    // const taskData = req.body.Task;
 
-    const { title, description, category, status } = taskData;
-    let dueDate = new Date(taskData.dueDate);
-    if (!title || !description || !(dueDate instanceof Date) || !category || !(status == 'Pending' || status == 'In Progress' || status == 'Complete')) {
+    // const { title, description, category, status } = taskData;
+    const { UserID, title, description, category, status, dueDate, dependencyOnAnotherTask } = req.query;
+    console.log(req.query);
+
+    let givenDueDate = new Date(dueDate);
+    if (!title || !description || !(givenDueDate instanceof Date) || !category || !(status == 'Pending' || status == 'In Progress' || status == 'Complete')) {
       return res.status(400).json({ message: 'Invalid Parameters' });
     }
   
@@ -294,9 +302,9 @@ app.post('/AddTask', UserMiddleware, async (req, res) => {
           assignedUserID: UserID,
           title,
           description,
-          dueDate,
+          dueDate: givenDueDate,
           category,
-          dependencyOnAnotherTask: taskData.dependencyOnAnotherTask || null,
+          dependencyOnAnotherTask: dependencyOnAnotherTask || null,
           status
       });
 
@@ -850,6 +858,8 @@ app.post('/ReassignTask', SupervisorMiddleware, async(req,res) => {
     }
 })
 
+//Notification
+
 app.get('/GetNotifications', UserMiddleware, async (req, res)=>{
     const { UserID } = req.body.params;
     try{
@@ -904,6 +914,8 @@ app.post('/MarkNotificationAsRead', UserMiddleware, async (req, res)=>{
     }
 });
 
+//Notification Preference
+
 app.get('/GetNotificationPreference', UserMiddleware, async (req, res)=>{
     const { UserID } = req.body.params;
     try{
@@ -915,6 +927,7 @@ app.get('/GetNotificationPreference', UserMiddleware, async (req, res)=>{
         return res.status(500).json({ message: 'Error Retriving Notification Preference',err})
     }
 });
+
 
 app.post('/SetNotificationPreference', UserMiddleware, async (req, res) => {
     const { UserID } = req.body.params;
